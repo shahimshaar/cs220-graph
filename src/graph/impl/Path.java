@@ -1,5 +1,5 @@
 package graph.impl;
-
+// Helper Path class for Dijkstra's algorithm implementation in Graph.java
 public class Path implements Comparable<Path>{
     private String dest;
     private int cost;

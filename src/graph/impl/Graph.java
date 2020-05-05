@@ -66,6 +66,7 @@ public class Graph implements IGraph
         valueset = newgraph.values();
         return valueset;
     }
+    // helper function for prim jarnik
     public int getGraphSize(IGraph x){
         int num = 0;
         Iterator<INode> itr = newneighbors.iterator();
@@ -88,6 +89,7 @@ public class Graph implements IGraph
     public void breadthFirstSearch(String startNodeName, NodeVisitor v)
     {
         Set<INode> visited = new HashSet<INode>();
+        // Queue for FIFO
         Queue<INode> tovisit = new LinkedList<INode>();
         tovisit.add(getOrCreateNode(startNodeName));
         while(!tovisit.isEmpty()){
@@ -118,6 +120,7 @@ public class Graph implements IGraph
     public void depthFirstSearch(String startNodeName, NodeVisitor v)
     {
         Set<INode> visited = new HashSet<INode>();
+        //Stack for LIFO
         Stack<INode> tovisit = new Stack<INode>();
         tovisit.add(getOrCreateNode(startNodeName));
         while(!tovisit.isEmpty()){
@@ -156,6 +159,7 @@ public class Graph implements IGraph
         while (result.size()<newgraph.size()){
             Path nextpath = (Path) todo.poll();
             String nodestring = nextpath.getDest();
+            // fetching the node using its key (string name)
             INode newnode = getOrCreateNode(nodestring);
             if (result.containsKey(newnode))
                     continue;

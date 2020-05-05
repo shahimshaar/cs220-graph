@@ -78,7 +78,7 @@ public class Node implements INode
      * @param weight
      */
     public void addUndirectedEdgeToNode(INode n, int weight) {
-
+        // an undirected edge is just two directed edges
         addDirectedEdgeToNode(n, weight);
         n.addDirectedEdgeToNode(this, weight);
     }

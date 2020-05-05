@@ -14,7 +14,7 @@ public interface INode
     
     void removeDirectedEdgeToNode(INode neighbor);
     
-    void removeUndirectedEdgeToNode(INode neightbor);
+    void removeUndirectedEdgeToNode(INode neighbor);
     
     boolean hasEdge(INode node);
     

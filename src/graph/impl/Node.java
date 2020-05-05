@@ -1,6 +1,8 @@
 package graph.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import graph.INode;
 
@@ -29,11 +31,16 @@ public class Node implements INode
      * 
      * @param name
      */
+    private String name;
+    private int weight;
+    private INode n;
+    private INode other;
+    private Map<INode, Integer> neighbors;
+    //private Map<INode, int> edges = new HashMap<>();
     public Node(String name) {
-        throw new UnsupportedOperationException("Implement this method");
+        this.name=name;
+        neighbors = new HashMap<INode, Integer>();
     }
-    
-    
     
     /**
      * Return the name of the node, which is a String.
@@ -41,7 +48,7 @@ public class Node implements INode
      * @return
      */
     public String getName() {
-        throw new UnsupportedOperationException("Implement this method");
+        return name;
     }
 
     /**
@@ -50,7 +57,7 @@ public class Node implements INode
      * @return
      */
     public Collection<INode> getNeighbors() {
-        throw new UnsupportedOperationException("Implement this method");
+        return neighbors.keySet();
     }
     
     /**
@@ -60,7 +67,7 @@ public class Node implements INode
      * @param weight
      */
     public void addDirectedEdgeToNode(INode n, int weight) {
-        throw new UnsupportedOperationException("Implement this method");
+        neighbors.put(n, weight);
     }
     
     /**
@@ -71,7 +78,9 @@ public class Node implements INode
      * @param weight
      */
     public void addUndirectedEdgeToNode(INode n, int weight) {
-        throw new UnsupportedOperationException("Implement this method");
+
+        addDirectedEdgeToNode(n, weight);
+        n.addDirectedEdgeToNode(this, weight);
     }
 
     /**
@@ -84,7 +93,7 @@ public class Node implements INode
      * @throws IllegalStateException
      */
     public void removeDirectedEdgeToNode(INode n) {
-        throw new UnsupportedOperationException("Implement this method");
+        neighbors.remove(n);
     }
     
     /**
@@ -98,7 +107,14 @@ public class Node implements INode
      * @throws IllegalStateException
      */
     public void removeUndirectedEdgeToNode(INode n) {
-        throw new UnsupportedOperationException("Implement this method");
+        if(neighbors.containsKey(n)){
+            neighbors.remove(n);
+            n.removeDirectedEdgeToNode(this);
+        }
+        else{
+            throw new IllegalStateException("Illegal State my friend.");
+        }
+
     }
     
     /**
@@ -109,7 +125,11 @@ public class Node implements INode
      * @return
      */
     public boolean hasEdge(INode other) {
-        throw new UnsupportedOperationException("Implement this method");
+        if(neighbors.containsKey(other)){
+            return true;
+        }
+        else
+            return false;
     }
     
     /**
@@ -122,6 +142,11 @@ public class Node implements INode
      * @throws IllegalStateException
      */
     public int getWeight(INode n) {
-        throw new UnsupportedOperationException("Implement this method");
+        if(neighbors.containsKey(n)){
+            return neighbors.get(n);
+        }
+        else{
+            throw new IllegalStateException("Illegal State my friend.");
+        }
     }
 }

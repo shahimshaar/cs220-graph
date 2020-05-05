@@ -82,6 +82,9 @@ graph dijkstra1 {
         IGraph g2 = graph.primJarnik();
         
         // TODO: put some assertions here to make sure that g2 works
+        assertTrue(g2.containsNode("A"));
+        assertTrue(g2.containsNode("B"));
+
         INode a = g2.getOrCreateNode("A");
         INode b = g2.getOrCreateNode("B");
         INode c = g2.getOrCreateNode("C");
